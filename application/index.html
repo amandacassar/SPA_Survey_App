@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>     
+        <meta charset="utf-8">
+
+        <!-- css and javascript files used -->
+        <link type="text/css" rel="stylesheet" href="lib/bootstrap.css">
+        <link type="text/css" rel="stylesheet" href="style.css">
+        <script src="./../server.js"></script>
+        <script src="lib/jquery-3.4.1.js"></script>
+        <script src="lib/popper.js"></script>
+        <script src="lib/bootstrap.js"></script>
+        <script src="lib/sweetalert.js"></script>
+        <script src="lib/jquery-3-3-1.js"></script>
+        <script src="lib/jquery-datatables.js"></script>
+        <script src="lib/datatables-buttons.js"></script>
+        <script src="lib/jszip-3-1-3.js"></script>
+        <script src="lib/pdfmake-min.js"></script>
+        <script src="lib/pdfmake-vfs_fonts.js"></script>        
+        <script src="lib/buttons-html5-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+        <script src="titles.js"></script>
+        <script src="account.js"></script>
+        <script src="surveys.js"></script>
+        <script src="countries.js"></script>
+
+        <!-- display page title -->
+        <title> Survey App </title>
+    </head>
+
+    <body>
+        <!-- displaying the main menu -->
+        <nav class="navbar navbar-expand-sm navbar-light bg-light menu-text ml-auto">
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarmenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse w-100 order-3 dual-collapse2" id="navbarmenu">                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" id="mySurveysMenu" onclick="mySurveys()"> MY SURVEYS </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="searchSurveysMenu" onclick="searchSurveys()"> SEARCH SURVEYS </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="suggestSurveysMenu" onclick="suggestedSurveys()"> SUGGESTED FOR YOU </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="accountMenu" onclick="account()"> ACCOUNT </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <!-- declaring the start of the main container -->
+        <div class="container-fluid">
+
+            <!-- defining the elements in the next row - this will contain: text, 2 textboxes, button
+                hiding all the elements, which will be displayed through javascript commands -->        
+            <div class="row">
+                <div class="col-lg-3 view-title">
+                    <h3 id="viewTitle"></h3>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control" id="textboxOne" placeholder="enter username..." required>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control" id="textboxTwo" placeholder="enter password..." required>
+                </div>
+                <div class="col-lg-2">
+                    <button onclick="return loginUser()" type="submit" class="btn btn-secondary mb-2" id="buttonOne"> Log In </button>
+                </div>
+            </div>
+
+
+            <!-- defining the next elements - left-side: grid container (main display); 
+                right-side (top to bottom): message, link, pictures container -->
+            <div class="row">
+                <!-- left-side elements -->
+                <div class="col-lg-9 main-container" id="mainContainer"></div>
+
+
+                <!-- right-side elements -->
+                <div class="col-lg-2">
+                    <!-- message -->
+                    <p class="flex-row message-text" id="messageOne"></p>
+
+                    <!-- link -->
+                    <a class="flex-row nav-link link-text" id="linkOne" onclick="return registrationForm()"> New? Register Here</a>
+
+                    <!-- contact us link -->
+                    <a class="flex-row nav-link contact-text" id="contactUs" onclick="return contactPage()"> Contact Us</a>
+
+                    <!-- container -->
+                    <div class="flex-row" id="rightContainer"></div>
+
+                </div>
+            </div>
+        <!-- closing the main container -->
+        </div>    
+
+
+
+        <!-- first load of the page -->
+        <script>
+            // declaring the elements as variables
+            const mySurveysMenu = document.getElementById("mySurveysMenu");
+            const searchSurveysMenu = document.getElementById("searchSurveysMenu");
+            const suggestSurveysMenu = document.getElementById("suggestSurveysMenu");
+            const accountMenu = document.getElementById("accountMenu");
+            const viewTitle = document.getElementById("viewTitle");
+            const textboxOne = document.getElementById("textboxOne");
+            const textboxTwo = document.getElementById("textboxTwo");
+            const buttonOne = document.getElementById("buttonOne");
+            const messageOne = document.getElementById("messageOne");
+            const linkOne = document.getElementById("linkOne");
+            const contactUs = document.getElementById("contactUs");
+            const rightContainer = document.getElementById("rightContainer");
+            const mainContainer = document.getElementById("mainContainer");
+            
+            // calling the function to peform first load of the page
+            window.onload = firstLoad()
+
+            function firstLoad()
+            {
+                // highlighting the selected menu and changing its text colour to white
+                accountMenu.style.backgroundColor = "steelblue";
+                accountMenu.style.color = "white";
+
+                // displaying the welcome message inside the main container
+                let main = "<p class='welcome-line'> Welcome to Survey App! </p>";
+                main += "<p class='first-message'> Sign in or sign up to start creating and contributing to <br> surveys... </p>";
+                mainContainer.innerHTML = main;
+
+                // textboxTwo - setting type as password, to hide the password while typing it
+                textboxTwo.setAttribute("type", "password");
+            }
+        </script>
+
+    </body>
+</html>
